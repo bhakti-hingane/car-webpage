@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELOX — Luxury Cars</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #fff;
+    }
+
+    .logo span {
+      color: #e50914;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 35px;
+    }
+
+    nav ul li a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #e50914;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      padding: 0 7%;
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.95) 0%, rgba(0,0,0,.65) 45%, rgba(0,0,0,.1)),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=90")
+        center/cover;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      animation: slideUp 1s ease;
+    }
+
+    .hero-content small {
+      color: #e50914;
+      font-weight: bold;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 8vw, 110px);
+      line-height: .9;
+      margin: 20px 0;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span {
+      color: #e50914;
+    }
+
+    .hero p {
+      color: #bbb;
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 30px;
+      background: #e50914;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 3px;
+      transition: .3s;
+    }
+
+    .btn:hover {
+      background: white;
+      color: #111;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(229,9,20,.35);
+    }
+
+    /* SECTION */
+    section {
+      padding: 100px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title small {
+      color: #e50914;
+      letter-spacing: 4px;
+    }
+
+    .section-title h2 {
+      font-size: 48px;
+      margin-top: 12px;
+    }
+
+    /* CARS */
+    .cars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .car-card {
+      background: #101010;
+      border: 1px solid #222;
+      overflow: hidden;
+      transition: .4s;
+    }
+
+    .car-card:hover {
+      transform: translateY(-10px);
+      border-color: #e50914;
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+    }
+
+    .car-image {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .6s;
+    }
+
+    .car-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .car-info {
+      padding: 25px;
+    }
+
+    .car-info h3 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .car-info p {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .specs {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #292929;
+      padding-top: 20px;
+    }
+
+    .specs div {
+      text-align: center;
+    }
+
+    .specs strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .specs span {
+      color: #777;
+      font-size: 11px;
+    }
+
+    /* PERFORMANCE */
+    .performance {
+      background: #0b0b0b;
+    }
+
+    .performance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .performance-image img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .performance-text small {
+      color: #e50914;
+      letter-spacing: 4px;
+    }
+
+    .performance-text h2 {
+      font-size: 55px;
+      margin: 15px 0 25px;
+    }
+
+    .performance-text p {
+      color: #999;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .number {
+      border-left: 2px solid #e50914;
+      padding-left: 15px;
+    }
+
+    .number strong {
+      display: block;
+      font-size: 30px;
+    }
+
+    .number span {
+      color: #777;
+      font-size: 12px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 250px 250px;
+      gap: 12px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .4s;
+      filter: brightness(.8);
+    }
+
+    .gallery img:hover {
+      filter: brightness(1);
+      transform: scale(1.02);
+    }
+
+    .gallery .big {
+      grid-row: span 2;
+    }
+
+    /* CONTACT */
+    .contact {
+      text-align: center;
+      background:
+        linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.9)),
+        url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80")
+        center/cover;
+    }
+
+    .contact h2 {
+      font-size: 55px;
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 35px 7%;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #222;
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* ANIMATION */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav ul {
+        display: none;
+      }
+
+      .cars {
+        grid-template-columns: 1fr;
+      }
+
+      .performance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 220px);
+      }
+
+      .gallery .big {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 70px 5%;
+      }
+
+      .hero {
+        padding: 0 5%;
+      }
+
+      .hero h1 {
+        font-size: 60px;
+      }
+
+      .section-title h2,
+      .performance-text h2,
+      .contact h2 {
+        font-size: 38px;
+      }
+
+      .numbers {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">VEL<span>O</span>X</div>
+
+    <ul>
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#collection">COLLECTION</a></li>
+      <li><a href="#performance">PERFORMANCE</a></li>
+      <li><a href="#gallery">GALLERY</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <small>The Art of Performance</small>
+
+      <h1>
+        Drive<br>
+        <span>Beyond</span><br>
+        Limits
+      </h1>
+
+      <p>
+        Experience a new definition of luxury, power and precision.
+        Discover extraordinary automobiles engineered for those who
+        refuse to settle for ordinary.
+      </p>
+
+      <a href="#collection" class="btn">EXPLORE COLLECTION →</a>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section id="collection">
+
+    <div class="section-title">
+      <small>OUR COLLECTION</small>
+      <h2>Exceptional Machines</h2>
+    </div>
+
+    <div class="cars">
+
+      <div class="car-card">
+        <div class="car-image">
+          <img
+            src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1000&q=85"
+            alt="Luxury sports car">
+        </div>
+
+        <div class="car-info">
+          <h3>Vortex GT</h3>
+          <p>Italian-inspired grand touring performance.</p>
+
+          <div class="specs">
+            <div>
+              <strong>3.2s</strong>
+              <span>0-100 KM/H</span>
+            </div>
+
+            <div>
+              <strong>620</strong>
+              <span>HP</span>
+            </div>
+
+            <div>
+              <strong>320</strong>
+              <span>KM/H</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="car-card">
+        <div class="car-image">
+          <img
+            src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85"
+            alt="Luxury black car">
+        </div>
+
+        <div class="car-info">
+          <h3>Shadow X</h3>
+          <p>Dark elegance combined with raw performance.</p>
+
+          <div class="specs">
+            <div>
+              <strong>2.9s</strong>
+              <span>0-100 KM/H</span>
+            </div>
+
+            <div>
+              <strong>710</strong>
+              <span>HP</span>
+            </div>
+
+            <div>
+              <strong>340</strong>
+              <span>KM/H</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="car-card">
+        <div class="car-image">
+          <img
+            src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1000&q=85"
+            alt="Luxury red sports car">
+        </div>
+
+        <div class="car-info">
+          <h3>Inferno R</h3>
+          <p>Uncompromising speed wrapped in iconic design.</p>
+
+          <div class="specs">
+            <div>
+              <strong>2.7s</strong>
+              <span>0-100 KM/H</span>
+            </div>
+
+            <div>
+              <strong>780</strong>
+              <span>HP</span>
+            </div>
+
+            <div>
+              <strong>355</strong>
+              <span>KM/H</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PERFORMANCE -->
+  <section class="performance" id="performance">
+
+    <div class="performance-grid">
+
+      <div class="performance-image">
+        <img
+          src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1400&q=85"
+          alt="Performance car">
+      </div>
+
+      <div class="performance-text">
+
+        <small>PURE PERFORMANCE</small>
+
+        <h2>Engineered<br>Without Limits.</h2>
+
+        <p>
+          Every VELOX automobile is engineered with obsessive attention
+          to detail. From aerodynamic bodywork to precision powertrains,
+          every component exists for one purpose — an unforgettable drive.
+        </p>
+
+        <div class="numbers">
+
+          <div class="number">
+            <strong>780</strong>
+            <span>HORSEPOWER</span>
+          </div>
+
+          <div class="number">
+            <strong>355</strong>
+            <span>KM/H TOP SPEED</span>
+          </div>
+
+          <div class="number">
+            <strong>2.7</strong>
+            <span>SECONDS 0-100</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- GALLERY -->
+  <section id="gallery">
+
+    <div class="section-title">
+      <small>THE EXPERIENCE</small>
+      <h2>Designed to Be Seen</h2>
+    </div>
+
+    <div class="gallery">
+
+      <img class="big"
+        src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=1400&q=85"
+        alt="Sports car">
+
+      <img
+        src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=900&q=85"
+        alt="Luxury car">
+
+      <img
+        src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=85"
+        alt="Sports car">
+
+      <img
+        src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=85"
+        alt="Supercar">
+
+      <img
+        src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=85"
+        alt="Luxury automobile">
+
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+
+    <h2>Ready to Drive?</h2>
+
+    <p>
+      Your extraordinary journey begins here.
+    </p>
+
+    <a href="mailto:hello@velox.com" class="btn">
+      BOOK A TEST DRIVE
+    </a>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2026 VELOX AUTOMOTIVE</div>
+    <div>PRECISION · POWER · PRESTIGE</div>
+  </footer>
+
+</body>
+</html>
